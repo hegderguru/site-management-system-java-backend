@@ -16,7 +16,7 @@ public class SiteService implements ISiteService {
     }
 
     @Override
-    public List<SiteInfo> findBySiteId() {
+    public List<SiteInfo> findBySiteId(Long siteId) {
         return List.of();
     }
 
