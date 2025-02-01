@@ -8,7 +8,7 @@ public interface ISiteService {
 
     public List<SiteInfo> findAllSites();
 
-    public List<SiteInfo> findBySiteId();
+    public List<SiteInfo> findBySiteId(Long siteId);
 
     public List<SiteInfo> findByPerson(Long personId);
 
