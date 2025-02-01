@@ -8,8 +8,20 @@ import java.util.List;
 @RequestMapping("/site")
 public class SiteController {
 
-    public List<SiteInfo> findAllSites(){
-        return null;
+    public List<SiteInfo> findAllSites() {
+        return List.of();
+    }
+
+    public List<SiteInfo> findBySiteId() {
+        return List.of();
+    }
+
+    public List<SiteInfo> findByPerson(Long personId) {
+        return List.of();
+    }
+
+    public List<SiteInfo> findByOrganisation(Long organisationId) {
+        return List.of();
     }
 
 }

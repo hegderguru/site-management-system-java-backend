@@ -25,6 +25,4 @@ public class SiteInfo {
 
     private SiteLocation location;
 
-    private List<PersonInfo> owners;
-
 }

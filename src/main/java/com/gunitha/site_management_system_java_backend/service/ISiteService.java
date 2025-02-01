@@ -8,8 +8,10 @@ public interface ISiteService {
 
     public List<SiteInfo> findAllSites();
 
-    public List<SiteInfo> findSitesByPerson(Long personId);
+    public List<SiteInfo> findBySiteId();
 
-    public List<SiteInfo> findSitesByOrganisation(Long organisationId);
+    public List<SiteInfo> findByPerson(Long personId);
+
+    public List<SiteInfo> findByOrganisation(Long organisationId);
 
 }

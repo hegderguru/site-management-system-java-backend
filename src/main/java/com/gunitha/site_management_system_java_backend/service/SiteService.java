@@ -9,18 +9,24 @@ import java.util.List;
 @Slf4j
 @Service("siteService")
 public class SiteService implements ISiteService {
+
     @Override
     public List<SiteInfo> findAllSites() {
         return List.of();
     }
 
     @Override
-    public List<SiteInfo> findSitesByPerson(Long personId) {
+    public List<SiteInfo> findBySiteId() {
         return List.of();
     }
 
     @Override
-    public List<SiteInfo> findSitesByOrganisation(Long organisationId) {
+    public List<SiteInfo> findByPerson(Long personId) {
+        return List.of();
+    }
+
+    @Override
+    public List<SiteInfo> findByOrganisation(Long organisationId) {
         return List.of();
     }
 }
