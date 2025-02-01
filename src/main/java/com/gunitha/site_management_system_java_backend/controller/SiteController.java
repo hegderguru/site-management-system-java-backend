@@ -30,7 +30,7 @@ public class SiteController {
     }
 
     public SiteInfo createSite(SiteInfo siteInfo){
-        return iSiteService.createSite(SiteInfo siteInfo);
+        return iSiteService.createSite(siteInfo);
     }
 
 }
