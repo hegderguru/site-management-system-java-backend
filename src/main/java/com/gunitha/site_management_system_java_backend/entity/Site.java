@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 @Data
 @AllArgsConstructor
@@ -22,5 +24,7 @@ public class Site {
     @OneToOne(cascade = CascadeType.ALL)
     private Location location;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Person> owners;
 
 }
