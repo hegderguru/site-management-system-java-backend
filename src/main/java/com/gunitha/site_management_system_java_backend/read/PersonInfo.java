@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PersonInfo {
 
-    private Long personId;
+    private Long id;
 
     private String firstName;
     private String middleName;

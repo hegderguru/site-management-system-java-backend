@@ -11,11 +11,19 @@ import java.util.List;
 @NoArgsConstructor
 public class SiteInfo {
 
-    private Long siteId;
+    private Long id;
 
-    private String siteNumber;
+    private String number;
 
-    private List<SiteLocation> siteLocations;
+    private Integer siteWidth;
+
+    private Integer length;
+
+    private AddressInfo addressInfo;
+
+    private String description;
+
+    private SiteLocation location;
 
     private List<PersonInfo> owners;
 

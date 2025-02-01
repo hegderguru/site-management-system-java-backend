@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SiteLocation {
 
-    private Long locationId;
+    private Long id;
 
     private Double[] centreLatitudeAndLongitude;
 

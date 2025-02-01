@@ -21,6 +21,15 @@ public class Site {
     @SequenceGenerator(name = "site_seq",sequenceName = "site_seq",initialValue = 100000,allocationSize = 20)
     private Long id;
 
+    private Integer width;
+
+    private Integer length;
+
+    private String description;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address siteAddress;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Location location;
 

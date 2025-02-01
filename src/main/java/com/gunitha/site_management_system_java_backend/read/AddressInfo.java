@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 public class AddressInfo {
 
+    private Long id;
+
     private String floor;
 
     private String number;

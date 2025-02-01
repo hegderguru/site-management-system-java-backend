@@ -8,7 +8,7 @@ import java.util.List;
 @RequestMapping("/site")
 public class SiteController {
 
-    public List<SiteInfo> findSitesByIds(){
+    public List<SiteInfo> findAllSites(){
         return null;
     }
 
