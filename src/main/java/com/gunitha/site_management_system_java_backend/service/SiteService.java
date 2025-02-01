@@ -29,4 +29,9 @@ public class SiteService implements ISiteService {
     public List<SiteInfo> findByOrganisation(Long organisationId) {
         return List.of();
     }
+
+    @Override
+    public SiteInfo createSite(SiteInfo siteInfo) {
+        return null;
+    }
 }

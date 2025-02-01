@@ -29,4 +29,8 @@ public class SiteController {
         return iSiteService.findByOrganisation(organisationId);
     }
 
+    public SiteInfo createSite(SiteInfo siteInfo){
+        return iSiteService.createSite(SiteInfo siteInfo);
+    }
+
 }

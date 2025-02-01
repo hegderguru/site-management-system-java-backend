@@ -14,4 +14,6 @@ public interface ISiteService {
 
     public List<SiteInfo> findByOrganisation(Long organisationId);
 
+    public SiteInfo createSite(SiteInfo siteInfo);
+
 }
