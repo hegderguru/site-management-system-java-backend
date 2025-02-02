@@ -1,4 +1,4 @@
-package com.gunitha.site_management_system_java_backend.read;
+package com.gunitha.site_management_system_java_backend.model.update;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressInfo {
+public class AddressInfoUpdate {
 
     private Long id;
 

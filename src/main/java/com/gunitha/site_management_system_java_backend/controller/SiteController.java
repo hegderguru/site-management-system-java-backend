@@ -1,6 +1,7 @@
 package com.gunitha.site_management_system_java_backend.controller;
 
-import com.gunitha.site_management_system_java_backend.read.SiteInfo;
+import com.gunitha.site_management_system_java_backend.model.read.SiteInfo;
+import com.gunitha.site_management_system_java_backend.model.update.SiteInfoUpdate;
 import com.gunitha.site_management_system_java_backend.service.ISiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +30,8 @@ public class SiteController {
         return iSiteService.findByOrganisation(organisationId);
     }
 
-    public SiteInfo createSite(SiteInfo siteInfo){
-        return iSiteService.createSite(siteInfo);
+    public SiteInfo createSite(SiteInfoUpdate siteInfoUpdate){
+        return iSiteService.createSite(siteInfoUpdate);
     }
 
 }

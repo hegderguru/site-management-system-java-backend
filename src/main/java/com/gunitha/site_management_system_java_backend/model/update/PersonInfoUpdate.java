@@ -1,6 +1,7 @@
-package com.gunitha.site_management_system_java_backend.read;
+package com.gunitha.site_management_system_java_backend.model.update;
 
 
+import com.gunitha.site_management_system_java_backend.model.read.AddressInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PersonInfo {
+public class PersonInfoUpdate {
 
     private Long id;
 

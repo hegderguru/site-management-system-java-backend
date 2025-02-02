@@ -1,6 +1,6 @@
 package com.gunitha.site_management_system_java_backend.service;
 
-import com.gunitha.site_management_system_java_backend.read.PersonInfo;
+import com.gunitha.site_management_system_java_backend.model.read.PersonInfo;
 
 import java.util.List;
 

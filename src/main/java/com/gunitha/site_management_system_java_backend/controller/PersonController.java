@@ -1,6 +1,6 @@
 package com.gunitha.site_management_system_java_backend.controller;
 
-import com.gunitha.site_management_system_java_backend.read.PersonInfo;
+import com.gunitha.site_management_system_java_backend.model.read.PersonInfo;
 import com.gunitha.site_management_system_java_backend.service.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
