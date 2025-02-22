@@ -1,6 +1,7 @@
 package com.gunitha.site_management_system_java_backend.model.update;
 
 
+import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObjectId;
 import com.gunitha.site_management_system_java_backend.model.read.AddressInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PersonInfoUpdate {
 
+    @ChangeTargetObjectId
     private Long id;
 
     private String firstName;

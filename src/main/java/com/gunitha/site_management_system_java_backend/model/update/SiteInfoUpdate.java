@@ -1,6 +1,7 @@
 package com.gunitha.site_management_system_java_backend.model.update;
 
 
+import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObjectId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class SiteInfoUpdate {
 
+    @ChangeTargetObjectId
     private Long id;
 
     private String number;

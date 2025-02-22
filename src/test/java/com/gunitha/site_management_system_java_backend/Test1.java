@@ -34,6 +34,5 @@ public class Test1 {
         siteInfoUpdate.getPersonInfoUpdates().get(0).setFirstName("Guru");
         siteInfoUpdate.getPersonInfoUpdates().get(1).setFirstName("Guru1");
         List<ChangeTargetObject> allCustomTypeObjects = ChangesUtil.getAllCustomTypeObjects(siteInfoUpdate);
-    //    System.out.println((new ObjectMapper()).writeValueAsString(allCustomTypeObjects));
     }
 }

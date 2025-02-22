@@ -1,11 +1,14 @@
 package com.gunitha.site_management_system_java_backend.util;
 
 import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObject;
+import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObjectId;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ChangesUtil {
@@ -24,7 +27,7 @@ public class ChangesUtil {
                             }
                         }
                     } else {
-                        return Stream.of(new ChangeTargetObject(object, field));
+                        return Stream.of(new ChangeTargetObject(object,getChangeTargetObjectId(object), field));
                     }
                 }
             } catch (IllegalAccessException e) {
@@ -32,6 +35,30 @@ public class ChangesUtil {
             }
             return java.util.stream.Stream.empty();
         }).toList();
+    }
+
+    private static String getChangeTargetObjectId(Object object) {
+        List<Field> idFields = Arrays.stream(object.getClass().getDeclaredFields()).filter(field -> {
+            field.setAccessible(true);
+            return Arrays.stream(field.getAnnotations())
+                    .anyMatch(annotation -> annotation.annotationType().equals(ChangeTargetObjectId.class));
+        }).toList();
+        List<Field> idFieldsSorted = idFields.stream().sorted((field1, field2) -> {
+            field1.setAccessible(true);
+            field2.setAccessible(true);
+            try {
+                return field1.get(object).getClass().getName().compareTo(field2.get(object).getClass().getName());
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }).toList();
+        return idFieldsSorted.stream().map(field -> {
+            try {
+                return field.get(object).toString();
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }).collect(Collectors.joining());
     }
 
     public static boolean isCustomType(Class clazz) {

@@ -14,5 +14,6 @@ import java.util.List;
 @Builder
 public class ChangeTargetObject {
     private Object targetObject;
+    private String id;
     private Field fields;
 }
