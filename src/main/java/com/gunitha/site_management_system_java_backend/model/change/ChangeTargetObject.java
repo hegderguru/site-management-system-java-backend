@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -15,5 +14,5 @@ import java.util.List;
 public class ChangeTargetObject {
     private Object targetObject;
     private String id;
-    private Field fields;
+    private Field field;
 }
