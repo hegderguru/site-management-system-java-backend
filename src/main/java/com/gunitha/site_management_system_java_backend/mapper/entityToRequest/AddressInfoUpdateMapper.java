@@ -8,13 +8,13 @@ import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Service("addressMapper")
+@Service("addressInfoUpdateReadMapper")
 public class AddressInfoUpdateMapper {
 
-    private final static ModelMapper addresUpdateModelMapper = new ModelMapper();
+    private final static ModelMapper addresInfoModelMapper = new ModelMapper();
 
     static {
-        TypeMap<Address, AddressInfoUpdate> typeMap = addresUpdateModelMapper.createTypeMap(Address.class, AddressInfoUpdate.class);
+        TypeMap<Address, AddressInfoUpdate> typeMap = addresInfoModelMapper.createTypeMap(Address.class, AddressInfoUpdate.class);
         typeMap.addMappings(mapper -> {
             mapper.map(Address::getId, AddressInfoUpdate::setId);
             mapper.map(Address::getAddressType, AddressInfoUpdate::setAddressType);
@@ -29,7 +29,7 @@ public class AddressInfoUpdateMapper {
     }
 
     public AddressInfoUpdate AddressInfoUpdate(Address address) {
-        return addresUpdateModelMapper.map(address, AddressInfoUpdate.class);
+        return addresInfoModelMapper.map(address, AddressInfoUpdate.class);
     }
 
 }

@@ -2,6 +2,7 @@ package com.gunitha.site_management_system_java_backend.service;
 
 import com.gunitha.site_management_system_java_backend.model.read.SiteInfo;
 import com.gunitha.site_management_system_java_backend.model.update.SiteInfoUpdate;
+import com.gunitha.site_management_system_java_backend.repository.ISiteRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,8 @@ import java.util.List;
 @Slf4j
 @Service("siteService")
 public class SiteService implements ISiteService {
+
+    ISiteRepository iSiteRepository;
 
     @Override
     public List<SiteInfo> findAllSites() {

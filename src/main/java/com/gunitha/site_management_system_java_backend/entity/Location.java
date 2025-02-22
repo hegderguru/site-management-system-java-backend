@@ -22,7 +22,7 @@ public class Location {
     private Long id;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    private List<Double[]> latitudeAndLongitude;
+    private List<Double[]> latitudeAndLongitudes;
 
     private Double centerLatitude;
 

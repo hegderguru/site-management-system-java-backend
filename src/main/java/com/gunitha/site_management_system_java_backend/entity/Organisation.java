@@ -18,5 +18,11 @@ public class Organisation {
 
     @OneToOne(cascade = CascadeType.REFRESH)
     private OrganisationType organisationType;
+
+    private String name;
+
+    private String description;
+
+    private Address address;
     
 }

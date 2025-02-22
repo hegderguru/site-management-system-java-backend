@@ -4,23 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SiteInfo {
+public class LocationInfo {
 
     private Long id;
 
-    private String number;
+    private Double centerLatitude;
 
-    private Integer siteWidth;
+    private Double centerLongitude;
 
-    private Integer length;
-
-    private AddressInfo addressInfo;
-
-    private String description;
-
-    private LocationInfo location;
+    private List<Double[]> latitudeAndLongitudes;
 
 }

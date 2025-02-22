@@ -1,6 +1,6 @@
 package com.gunitha.site_management_system_java_backend.model.update;
 
-
+import com.gunitha.site_management_system_java_backend.model.read.AddressInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,20 +8,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SiteInfoUpdate {
+public class OrganisationInfoUpdate {
 
     private Long id;
 
-    private String number;
+    private String organisationType;
 
-    private Integer siteWidth;
-
-    private Integer length;
+    private String name;
 
     private String description;
 
-    private AddressInfoUpdate addressInfo;
-
-    private LocationInfoUpdate location;
-
+    private AddressInfo addressInfo;
 }

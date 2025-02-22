@@ -4,23 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SiteInfo {
+public class OrganisationInfo {
 
     private Long id;
 
-    private String number;
+    private String organisationType;
 
-    private Integer siteWidth;
-
-    private Integer length;
-
-    private AddressInfo addressInfo;
+    private String name;
 
     private String description;
 
-    private LocationInfo location;
+    private AddressInfo addressInfo;
 
 }

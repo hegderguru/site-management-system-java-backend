@@ -8,8 +8,8 @@ import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Service("addressMapper")
-public class AddressInfoMapper {
+@Service("addressInfoReadMapper")
+public class AddressInfoReadMapper {
 
     private final static ModelMapper addresInfoModelMapper = new ModelMapper();
 
