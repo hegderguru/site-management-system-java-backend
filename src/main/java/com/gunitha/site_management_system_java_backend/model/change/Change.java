@@ -13,11 +13,11 @@ import java.util.Map;
 @NoArgsConstructor
 @Builder
 public class Change {
-
-    private Object left;
-    private Object right;
-    private Field field;
-    private Map<Object,Change> changes;
-    private boolean changeFound;
-
+    private String id;
+    private Object leftObject;
+    private Object rightObject;
+    private String fieldName;
+    private Object leftValue;
+    private Object rightValue;
+    private String path;
 }

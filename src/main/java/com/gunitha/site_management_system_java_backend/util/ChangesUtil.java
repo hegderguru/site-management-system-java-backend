@@ -1,13 +1,11 @@
 package com.gunitha.site_management_system_java_backend.util;
 
+import com.gunitha.site_management_system_java_backend.model.change.Change;
 import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObject;
 import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObjectId;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,7 +25,7 @@ public class ChangesUtil {
                             }
                         }
                     } else {
-                        return Stream.of(new ChangeTargetObject(object, getChangeTargetObjectId(object), path + "." + field.getName(), field.get(object)));
+                        return Stream.of(new ChangeTargetObject(object, getChangeTargetObjectId(object),field, path + "." + field.getName(), field.get(object)));
                     }
                 }
             } catch (IllegalAccessException e) {
@@ -63,6 +61,22 @@ public class ChangesUtil {
 
     public static boolean isCustomType(Class clazz) {
         return !(clazz.isPrimitive() || clazz.getName().startsWith("java."));
+    }
+
+    public static List<Change> getChanges(List<ChangeTargetObject> existing, List<ChangeTargetObject> updated) {
+        return updated.stream().map(changeTargetObject -> {
+            Optional<ChangeTargetObject> changeTargetObjectOptional = existing.stream().filter(changeTargetObject1 -> changeTargetObject.getPath().equals(changeTargetObject1.getPath()) && changeTargetObject.getId().equals(changeTargetObject1.getId())).findFirst();
+            if (changeTargetObjectOptional.isPresent()) {
+                if (!changeTargetObjectOptional.get().getValue().equals(changeTargetObject.getValue())) {
+                    return Change.builder().id(changeTargetObject.getId()).path(changeTargetObject.getPath()).leftObject(changeTargetObjectOptional.get().getTargetObject())
+                            .rightObject(changeTargetObject.getTargetObject()).fieldName(changeTargetObject.getField().getName()).leftValue(changeTargetObjectOptional.get().getValue()).rightValue(changeTargetObject.getValue())
+                            .build();
+                }
+            } else {
+                return Change.builder().id(changeTargetObject.getId()).path(changeTargetObject.getPath()).rightObject(changeTargetObject).build();
+            }
+            return null;
+        }).filter(Objects::nonNull).toList();
     }
 
 }

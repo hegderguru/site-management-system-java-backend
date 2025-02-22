@@ -3,6 +3,7 @@ package com.gunitha.site_management_system_java_backend;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gunitha.site_management_system_java_backend.entity.Person;
+import com.gunitha.site_management_system_java_backend.model.change.Change;
 import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObject;
 import com.gunitha.site_management_system_java_backend.model.update.AddressInfoUpdate;
 import com.gunitha.site_management_system_java_backend.model.update.PersonInfoUpdate;
@@ -20,6 +21,16 @@ public class Test1 {
 
     @Test
     public void test() throws JsonProcessingException {
+        SiteInfoUpdate siteInfoUpdate = getSiteInfoUpdate();
+        List<ChangeTargetObject> allCustomTypeObjects1 = ChangesUtil.getAllCustomTypeObjects(siteInfoUpdate, siteInfoUpdate.getClass().getName());
+        SiteInfoUpdate siteInfoUpdate1 = getSiteInfoUpdate();
+        siteInfoUpdate1.getPersonInfoUpdates().get(0).setFirstName("Guru3");
+        siteInfoUpdate1.getPersonInfoUpdates().get(1).setLastName("Hegde");
+        List<ChangeTargetObject> allCustomTypeObjects2 = ChangesUtil.getAllCustomTypeObjects(siteInfoUpdate1,siteInfoUpdate1.getClass().getName());
+        List<Change> changes = ChangesUtil.getChanges(allCustomTypeObjects1, allCustomTypeObjects2);
+    }
+
+    private static SiteInfoUpdate getSiteInfoUpdate() {
         SiteInfoUpdate siteInfoUpdate = new SiteInfoUpdate();
         siteInfoUpdate.setId(1L);
         siteInfoUpdate.setDescription("s");
@@ -33,6 +44,6 @@ public class Test1 {
         siteInfoUpdate.getPersonInfoUpdates().get(1).setId(3L);
         siteInfoUpdate.getPersonInfoUpdates().get(0).setFirstName("Guru");
         siteInfoUpdate.getPersonInfoUpdates().get(1).setFirstName("Guru1");
-        List<ChangeTargetObject> allCustomTypeObjects = ChangesUtil.getAllCustomTypeObjects(siteInfoUpdate,siteInfoUpdate.getClass().getName());
+        return siteInfoUpdate;
     }
 }
