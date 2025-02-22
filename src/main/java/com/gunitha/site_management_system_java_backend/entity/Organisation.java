@@ -23,6 +23,7 @@ public class Organisation {
 
     private String description;
 
+    @OneToOne(cascade = CascadeType.REFRESH)
     private Address address;
     
 }

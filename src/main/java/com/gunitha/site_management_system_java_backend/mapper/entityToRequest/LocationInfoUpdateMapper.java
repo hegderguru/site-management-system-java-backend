@@ -21,7 +21,7 @@ public class LocationInfoUpdateMapper {
             mapper.map(Location::getId, LocationInfoUpdate::setId);
             mapper.map(Location::getCenterLatitude,LocationInfoUpdate::setCenterLatitude);
             mapper.map(Location::getCenterLongitude,LocationInfoUpdate::setCenterLongitude);
-            mapper.map(Location::getLatitudeAndLongitudes,LocationInfoUpdate::setLatitudeAndLongitudes);
+            //mapper.map(Location::getLatitudeAndLongitudes,LocationInfoUpdate::setLatitudeAndLongitudes);
         });
     }
 

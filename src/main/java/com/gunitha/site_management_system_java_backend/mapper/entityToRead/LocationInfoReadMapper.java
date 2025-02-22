@@ -19,7 +19,7 @@ public class LocationInfoReadMapper {
             mapper.map(Location::getId, LocationInfo::setId);
             mapper.map(Location::getCenterLatitude,LocationInfo::setCenterLatitude);
             mapper.map(Location::getCenterLongitude,LocationInfo::setCenterLongitude);
-            mapper.map(Location::getLatitudeAndLongitudes,LocationInfo::setLatitudeAndLongitudes);
+            //mapper.map(Location::getLatitudeAndLongitudes,LocationInfo::setLatitudeAndLongitudes);
         });
     }
 
