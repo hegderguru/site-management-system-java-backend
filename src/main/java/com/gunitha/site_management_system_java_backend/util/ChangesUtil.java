@@ -18,7 +18,7 @@ public class ChangesUtil {
                 if (Objects.nonNull(field.get(object))) {
                     if (isCustomType(field.get(object).getClass()) || field.get(object).getClass().getName().equals(ArrayList.class.getName())) {
                         if (field.get(object).getClass().getName().equals(ArrayList.class.getName())) {
-                            return ((ArrayList) field.get(object)).stream().flatMap(o -> getAllCustomTypeObjects(o).stream()).toList().stream();
+                            return ((ArrayList<Object>) field.get(object)).stream().flatMap(o -> getAllCustomTypeObjects(o).stream()).toList().stream();
                         } else {
                             if (field.get(object).getClass().getName().startsWith("com.gunitha.")) {
                                 return getAllCustomTypeObjects(field.get(object)).stream();
