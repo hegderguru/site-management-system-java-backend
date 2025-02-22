@@ -13,21 +13,21 @@ import java.util.stream.Stream;
 
 public class ChangesUtil {
 
-    public static List<ChangeTargetObject> getAllCustomTypeObjects(Object object) {
+    public static List<ChangeTargetObject> getAllCustomTypeObjects(Object object, String path) {
         return Arrays.stream(object.getClass().getDeclaredFields()).flatMap(field -> {
             try {
                 field.setAccessible(true);
                 if (Objects.nonNull(field.get(object))) {
                     if (isCustomType(field.get(object).getClass()) || field.get(object).getClass().getName().equals(ArrayList.class.getName())) {
                         if (field.get(object).getClass().getName().equals(ArrayList.class.getName())) {
-                            return ((ArrayList<Object>) field.get(object)).stream().flatMap(o -> getAllCustomTypeObjects(o).stream()).toList().stream();
+                            return ((ArrayList<Object>) field.get(object)).stream().flatMap(o -> getAllCustomTypeObjects(o, field.getName()).stream()).toList().stream();
                         } else {
                             if (field.get(object).getClass().getName().startsWith("com.gunitha.")) {
-                                return getAllCustomTypeObjects(field.get(object)).stream();
+                                return getAllCustomTypeObjects(field.get(object), field.getName()).stream();
                             }
                         }
                     } else {
-                        return Stream.of(new ChangeTargetObject(object,getChangeTargetObjectId(object), field));
+                        return Stream.of(new ChangeTargetObject(object, getChangeTargetObjectId(object), path + "." + field.getName(), field.get(object)));
                     }
                 }
             } catch (IllegalAccessException e) {

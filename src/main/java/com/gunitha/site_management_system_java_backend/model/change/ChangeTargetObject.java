@@ -14,5 +14,7 @@ import java.lang.reflect.Field;
 public class ChangeTargetObject {
     private Object targetObject;
     private String id;
-    private Field field;
+    //private Field field;
+    private String path;
+    private Object value;
 }
