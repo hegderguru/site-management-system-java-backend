@@ -2,7 +2,6 @@ package com.gunitha.site_management_system_java_backend.util;
 
 import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
