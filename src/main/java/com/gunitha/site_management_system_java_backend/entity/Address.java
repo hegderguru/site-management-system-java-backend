@@ -35,4 +35,5 @@ public class Address {
 
     @OneToOne(cascade = CascadeType.REFRESH)
     private AddressType AddressType;
+
 }

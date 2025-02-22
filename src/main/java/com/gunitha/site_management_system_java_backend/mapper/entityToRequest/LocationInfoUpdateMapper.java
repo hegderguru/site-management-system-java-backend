@@ -9,10 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Service("locationInfoUpdateReadMapper")
+
+@Service
 public class LocationInfoUpdateMapper {
 
     private final static ModelMapper locationInfoModelMapper = new ModelMapper();

@@ -11,10 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Service("siteInfoUpdateMapper")
+@Service
 public class SiteInfoUpdateMapper {
 
     private final static ModelMapper siteInfoModelMapper = new ModelMapper();

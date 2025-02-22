@@ -9,7 +9,7 @@ import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Service("personInfoUpdateMapper")
+@Service
 public class PersonInfoUpdateMapper {
 
     private final static ModelMapper personInfoModelMapper = new ModelMapper();
