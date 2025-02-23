@@ -12,6 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -20,15 +24,33 @@ public class AddressInfoUpdateEntityMapper {
     @Autowired
     AddressTypeRepository addressTypeRepository;
 
-    public void updateOrAddNewAddressEntity(List<Change> changes, Site site, Person person){
+    public List<Address> updateOrAddNewAddressEntity(List<Change> changes, Site site, Person person) {
+        Map<AddressInfoUpdate, List<Change>> addressUpdatesMap = changes.stream().filter(change -> Objects.nonNull(change.getLeftObject()) && change.getRightObject() instanceof AddressInfoUpdate)
+                .collect(Collectors.groupingBy(change -> (AddressInfoUpdate) change.getRightObject()));
+        addressUpdatesMap.keySet().forEach(key -> updateAddressEntity(addressUpdatesMap.get(key), getAddresses(key, site, person)));
 
+        return changes.stream().filter(change -> Objects.isNull(change.getLeftObject()) && change.getRightObject() instanceof AddressInfoUpdate)
+                .map(change -> newAddressEntity((AddressInfoUpdate) change.getRightObject())).toList();
     }
 
-    public void updateAddressEntity(List<Change> changes, Address address){
+    private Address getAddresses(AddressInfoUpdate addressInfoUpdate, Site site, Person person) {
+        if (Objects.nonNull(site) && site.getSiteAddress().getId().equals(addressInfoUpdate.getId())) {
+            return site.getSiteAddress();
+        } else if (Objects.nonNull(person)) {
+            Optional<Address> addressOptional = person.getAddresses().stream().filter(address -> address.getId().equals(addressInfoUpdate.getId())).findFirst();
+            if (addressOptional.isPresent()) {
+                return addressOptional.get();
+            }
+        }
+        return null;
+    }
+
+    public void updateAddressEntity(List<Change> changes, Address address) {
         changes.forEach(change -> {
             AddressInfoUpdate addressInfoUpdate = (AddressInfoUpdate) change.getRightObject();
-            switch (AddressInfoUpdate.Fields.valueOf(change.getFieldName())){
-                case addressType -> address.setAddressType(addressTypeRepository.finByType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
+            switch (AddressInfoUpdate.Fields.valueOf(change.getFieldName())) {
+                case addressType ->
+                        address.setAddressType(addressTypeRepository.finByType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
                 case number -> address.setNumber(ChangeValueExtractUtil.extractString(change.getRightValue()));
                 case floor -> address.setFloor(ChangeValueExtractUtil.extractString(change.getRightValue()));
                 case street -> address.setStreet(ChangeValueExtractUtil.extractString(change.getRightValue()));
@@ -39,5 +61,19 @@ public class AddressInfoUpdateEntityMapper {
                 case pinCode -> address.setPinCode(ChangeValueExtractUtil.extractString(change.getRightValue()));
             }
         });
+    }
+
+    public Address newAddressEntity(AddressInfoUpdate addressInfoUpdate) {
+        return Address.builder()
+                .AddressType(addressTypeRepository.finByType(addressInfoUpdate.getAddressType()).get())
+                .floor(addressInfoUpdate.getFloor())
+                .number(addressInfoUpdate.getNumber())
+                .street(addressInfoUpdate.getStreet())
+                .village(addressInfoUpdate.getVillage())
+                .city(addressInfoUpdate.getCity())
+                .state(addressInfoUpdate.getState())
+                .country(addressInfoUpdate.getCountry())
+                .pinCode(addressInfoUpdate.getPinCode())
+                .build();
     }
 }
