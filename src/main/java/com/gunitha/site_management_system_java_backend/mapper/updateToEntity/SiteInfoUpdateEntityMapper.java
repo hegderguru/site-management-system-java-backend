@@ -47,7 +47,7 @@ public class SiteInfoUpdateEntityMapper {
         });
     }
 
-    private Site newSiteEntity(SiteInfoUpdate siteInfoUpdate) {
+    public Site newSiteEntity(SiteInfoUpdate siteInfoUpdate) {
         return Site.builder()
                 .number(siteInfoUpdate.getNumber())
                 .description(siteInfoUpdate.getDescription())

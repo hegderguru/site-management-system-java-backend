@@ -2,6 +2,7 @@ package com.gunitha.site_management_system_java_backend.service;
 
 import com.gunitha.site_management_system_java_backend.entity.Site;
 import com.gunitha.site_management_system_java_backend.mapper.entityToRead.SiteInfoReadMapper;
+import com.gunitha.site_management_system_java_backend.mapper.updateToEntity.SiteInfoUpdateEntityMapper;
 import com.gunitha.site_management_system_java_backend.model.read.SiteInfo;
 import com.gunitha.site_management_system_java_backend.model.update.SiteInfoUpdate;
 import com.gunitha.site_management_system_java_backend.repository.IOrganisationRepository;
@@ -29,6 +30,9 @@ public class SiteService implements ISiteService {
     @Autowired
     SiteInfoReadMapper siteInfoReadMapper;
 
+    @Autowired
+    SiteInfoUpdateEntityMapper siteInfoUpdateEntityMapper;
+
     @Override
     public List<SiteInfo> findAllSites() {
         return iSiteRepository.findAll().stream().map(site -> siteInfoReadMapper.siteInfo(site)).toList();
@@ -54,7 +58,7 @@ public class SiteService implements ISiteService {
 
     @Override
     public SiteInfo createSite(SiteInfoUpdate siteInfoUpdate) {
-        return null;
+        return siteInfoReadMapper.siteInfo(siteInfoUpdateEntityMapper.newSiteEntity(siteInfoUpdate));
     }
 
     @Override
