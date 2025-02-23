@@ -1,7 +1,6 @@
 package com.gunitha.site_management_system_java_backend.mapper.entityToRequest;
 
 import com.gunitha.site_management_system_java_backend.entity.Person;
-import com.gunitha.site_management_system_java_backend.model.read.PersonInfo;
 import com.gunitha.site_management_system_java_backend.model.update.PersonInfoUpdate;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

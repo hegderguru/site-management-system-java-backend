@@ -2,12 +2,14 @@ package com.gunitha.site_management_system_java_backend.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +25,7 @@ public class Person {
 
     private String middleName;
 
-    private String LastName;
+    private String lastName;
 
     private LocalDateTime dateOfBirth;
 
