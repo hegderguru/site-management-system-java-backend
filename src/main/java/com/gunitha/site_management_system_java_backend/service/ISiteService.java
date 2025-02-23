@@ -9,7 +9,7 @@ public interface ISiteService {
 
     public List<SiteInfo> findAllSites();
 
-    public List<SiteInfo> findBySiteId(Long siteId);
+    public SiteInfo findBySiteId(Long siteId);
 
     public List<SiteInfo> findByPerson(Long personId);
 

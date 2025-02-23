@@ -18,7 +18,7 @@ public class SiteController {
         return iSiteService.findAllSites();
     }
 
-    public List<SiteInfo> findBySiteId(Long siteId) {
+    public SiteInfo findBySiteId(Long siteId) {
         return iSiteService.findBySiteId(siteId);
     }
 

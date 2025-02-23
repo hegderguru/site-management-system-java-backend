@@ -10,4 +10,6 @@ import java.util.List;
 public interface ISiteRepository extends JpaRepository<Site,Long> {
 
     List<Person> findPersonBySitesId(Long siteId);
+
+    List<Site> findSitesByOwnersId(Long ownersId);
 }
