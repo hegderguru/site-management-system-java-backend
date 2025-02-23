@@ -48,7 +48,7 @@ public class OrganisationInfoUpdateEntityMapper {
                 case description ->
                         organisation.setDescription(ChangeValueExtractUtil.extractString(change.getRightValue()));
                 case organisationType ->
-                        organisation.setOrganisationType(IOrganisationTypeRepository.findByOrganisationType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
+                        organisation.setOrganisationType(IOrganisationTypeRepository.findByType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
             }
         });
     }
@@ -57,7 +57,7 @@ public class OrganisationInfoUpdateEntityMapper {
         return Organisation.builder()
                 .name(organisationInfoUpdate.getName())
                 .description(organisationInfoUpdate.getDescription())
-                .organisationType(IOrganisationTypeRepository.findByOrganisationType(organisationInfoUpdate.getOrganisationType()).get())
+                .organisationType(IOrganisationTypeRepository.findByType(organisationInfoUpdate.getOrganisationType()).get())
                 .build();
     }
 
