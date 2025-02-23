@@ -20,9 +20,9 @@ public class SiteInfoUpdate {
 
     private String number;
 
-    private Integer width;
+    private Double width;
 
-    private Integer length;
+    private Double length;
 
     private String description;
 
