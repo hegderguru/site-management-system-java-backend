@@ -4,12 +4,15 @@ package com.gunitha.site_management_system_java_backend.service;
 import com.gunitha.site_management_system_java_backend.change.ChangesUtil;
 import com.gunitha.site_management_system_java_backend.change.model.Change;
 import com.gunitha.site_management_system_java_backend.change.model.ChangeTargetObject;
+import com.gunitha.site_management_system_java_backend.entity.Organisation;
 import com.gunitha.site_management_system_java_backend.entity.Person;
+import com.gunitha.site_management_system_java_backend.entity.Site;
 import com.gunitha.site_management_system_java_backend.mapper.entityToRead.PersonInfoReadMapper;
 import com.gunitha.site_management_system_java_backend.mapper.entityToRequest.PersonInfoUpdateMapper;
 import com.gunitha.site_management_system_java_backend.mapper.updateToEntity.*;
 import com.gunitha.site_management_system_java_backend.model.read.PersonInfo;
 import com.gunitha.site_management_system_java_backend.model.update.PersonInfoUpdate;
+import com.gunitha.site_management_system_java_backend.repository.IOrganisationRepository;
 import com.gunitha.site_management_system_java_backend.repository.IPersonRepository;
 import com.gunitha.site_management_system_java_backend.repository.ISiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,9 @@ public class PersonService implements IPersonService {
     ISiteRepository iSiteRepository;
 
     @Autowired
+    IOrganisationRepository iOrganisationRepository;
+
+    @Autowired
     PersonInfoUpdateEntityMapper personInfoUpdateEntityMapper;
 
     @Autowired
@@ -54,12 +60,17 @@ public class PersonService implements IPersonService {
 
     @Override
     public List<PersonInfo> findPersonsByOrganisationId(Long organisationId) {
-        return iPersonRepository.findPersonsByOrganisationId(organisationId).stream()
+        return iPersonRepository.findPersonsByOrganisationsId(organisationId).stream()
                 .map(person -> personInfoReadMapper.personInfo(person)).toList();
     }
 
     @Override
     public List<PersonInfo> findBySiteId(Long siteId) {
+        Site site = iSiteRepository.findById(siteId).get();
+        List<Person> owners1 = site.getOwners();
+        List<Organisation> organisations = iOrganisationRepository.findOrganisationsBySitesId(siteId);
+        List<Person> owners2 = organisations.stream().flatMap(organisation -> organisation.getSites().stream()).flatMap(site1 -> site1.getOwners().stream()).toList();
+
         return iPersonRepository.findPersonBySitesId(siteId).stream().map(person -> personInfoReadMapper.personInfo(person)).toList();
     }
 
