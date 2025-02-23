@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,5 +29,8 @@ public class Organisation {
 
     @OneToOne(cascade = CascadeType.REFRESH)
     private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Site> sites;
     
 }

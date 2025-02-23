@@ -2,10 +2,9 @@ package com.gunitha.site_management_system_java_backend.mapper.updateToEntity;
 
 import com.gunitha.site_management_system_java_backend.change.model.Change;
 import com.gunitha.site_management_system_java_backend.change.model.ChangeValueExtractUtil;
-import com.gunitha.site_management_system_java_backend.entity.Organisation;
 import com.gunitha.site_management_system_java_backend.entity.Person;
 import com.gunitha.site_management_system_java_backend.model.update.PersonInfoUpdate;
-import com.gunitha.site_management_system_java_backend.repository.GenderRepository;
+import com.gunitha.site_management_system_java_backend.repository.IGenderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 public class PersonInfoUpdateEntityMapper {
 
     @Autowired
-    GenderRepository genderRepository;
+    IGenderRepository IGenderRepository;
 
     public List<Person> updateOrPersonNewLocation(List<Change> changes, Person person) {
         Map<PersonInfoUpdate, List<Change>> personInfoUpdateMap = changes.stream().filter(change -> Objects.nonNull(change.getLeftObject()) && change.getRightObject() instanceof PersonInfoUpdate)
@@ -48,7 +47,7 @@ public class PersonInfoUpdateEntityMapper {
                 case dateOfBirth ->
                         person.setDateOfBirth(ChangeValueExtractUtil.extractLocalDateTime(change.getRightValue()));
                 case gender ->
-                        person.setGender(genderRepository.findByType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
+                        person.setGender(IGenderRepository.findByType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
             }
         });
     }
@@ -59,7 +58,7 @@ public class PersonInfoUpdateEntityMapper {
                 .middleName(personInfoUpdate.getMiddleName())
                 .lastName(personInfoUpdate.getLastName())
                 .dateOfBirth(personInfoUpdate.getDateOfBirth())
-                .gender(genderRepository.findByType(personInfoUpdate.getGender()).get())
+                .gender(IGenderRepository.findByType(personInfoUpdate.getGender()).get())
                 .build();
     }
 

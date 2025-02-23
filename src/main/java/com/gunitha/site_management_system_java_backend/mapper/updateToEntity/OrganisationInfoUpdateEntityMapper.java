@@ -6,7 +6,7 @@ import com.gunitha.site_management_system_java_backend.change.model.ChangeValueE
 import com.gunitha.site_management_system_java_backend.entity.Organisation;
 import com.gunitha.site_management_system_java_backend.entity.Person;
 import com.gunitha.site_management_system_java_backend.model.update.OrganisationInfoUpdate;
-import com.gunitha.site_management_system_java_backend.repository.OrganisationTypeRepository;
+import com.gunitha.site_management_system_java_backend.repository.IOrganisationTypeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class OrganisationInfoUpdateEntityMapper {
 
     @Autowired
-    OrganisationTypeRepository organisationTypeRepository;
+    IOrganisationTypeRepository IOrganisationTypeRepository;
 
     public List<Organisation> updateOrAddNewLocation(List<Change> changes, Person person) {
         Map<OrganisationInfoUpdate, List<Change>> organisationInfoUpdateMap = changes.stream().filter(change -> Objects.nonNull(change.getLeftObject()) && change.getRightObject() instanceof OrganisationInfoUpdate)
@@ -48,7 +48,7 @@ public class OrganisationInfoUpdateEntityMapper {
                 case description ->
                         organisation.setDescription(ChangeValueExtractUtil.extractString(change.getRightValue()));
                 case organisationType ->
-                        organisation.setOrganisationType(organisationTypeRepository.findByOrganisationType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
+                        organisation.setOrganisationType(IOrganisationTypeRepository.findByOrganisationType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
             }
         });
     }
@@ -57,7 +57,7 @@ public class OrganisationInfoUpdateEntityMapper {
         return Organisation.builder()
                 .name(organisationInfoUpdate.getName())
                 .description(organisationInfoUpdate.getDescription())
-                .organisationType(organisationTypeRepository.findByOrganisationType(organisationInfoUpdate.getOrganisationType()).get())
+                .organisationType(IOrganisationTypeRepository.findByOrganisationType(organisationInfoUpdate.getOrganisationType()).get())
                 .build();
     }
 

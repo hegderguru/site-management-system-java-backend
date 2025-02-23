@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface OrganisationTypeRepository extends JpaRepository<OrganisationType,Long> {
+public interface IOrganisationTypeRepository extends JpaRepository<OrganisationType,Long> {
 
     Optional<OrganisationType> findByOrganisationType(String organisationType);
 

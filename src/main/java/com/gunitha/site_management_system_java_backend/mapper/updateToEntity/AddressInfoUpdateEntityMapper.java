@@ -6,7 +6,7 @@ import com.gunitha.site_management_system_java_backend.entity.Address;
 import com.gunitha.site_management_system_java_backend.entity.Person;
 import com.gunitha.site_management_system_java_backend.entity.Site;
 import com.gunitha.site_management_system_java_backend.model.update.AddressInfoUpdate;
-import com.gunitha.site_management_system_java_backend.repository.AddressTypeRepository;
+import com.gunitha.site_management_system_java_backend.repository.IAddressTypeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class AddressInfoUpdateEntityMapper {
 
     @Autowired
-    AddressTypeRepository addressTypeRepository;
+    IAddressTypeRepository IAddressTypeRepository;
 
     public List<Address> updateOrAddNewAddressEntity(List<Change> changes, Site site, Person person) {
         Map<AddressInfoUpdate, List<Change>> addressUpdatesMap = changes.stream().filter(change -> Objects.nonNull(change.getLeftObject()) && change.getRightObject() instanceof AddressInfoUpdate)
@@ -50,7 +50,7 @@ public class AddressInfoUpdateEntityMapper {
             AddressInfoUpdate addressInfoUpdate = (AddressInfoUpdate) change.getRightObject();
             switch (AddressInfoUpdate.Fields.valueOf(change.getFieldName())) {
                 case addressType ->
-                        address.setAddressType(addressTypeRepository.finByType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
+                        address.setAddressType(IAddressTypeRepository.finByType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
                 case number -> address.setNumber(ChangeValueExtractUtil.extractString(change.getRightValue()));
                 case floor -> address.setFloor(ChangeValueExtractUtil.extractString(change.getRightValue()));
                 case street -> address.setStreet(ChangeValueExtractUtil.extractString(change.getRightValue()));
@@ -65,7 +65,7 @@ public class AddressInfoUpdateEntityMapper {
 
     public Address newAddressEntity(AddressInfoUpdate addressInfoUpdate) {
         return Address.builder()
-                .AddressType(addressTypeRepository.finByType(addressInfoUpdate.getAddressType()).get())
+                .AddressType(IAddressTypeRepository.finByType(addressInfoUpdate.getAddressType()).get())
                 .floor(addressInfoUpdate.getFloor())
                 .number(addressInfoUpdate.getNumber())
                 .street(addressInfoUpdate.getStreet())

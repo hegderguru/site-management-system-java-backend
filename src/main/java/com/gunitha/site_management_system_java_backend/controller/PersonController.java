@@ -14,12 +14,15 @@ public class PersonController {
     @Autowired
     IPersonService iPersonService;
 
+    @Autowired
+    Orgr
+
     public PersonInfo findByPersonInfo(Long personId) {
         return iPersonService.findByPersonInfo(personId);
     }
 
     public List<PersonInfo> findByOrganisation(Long organisationId) {
-        return iPersonService.findPersonByOrganisationId(organisationId);
+        return iPersonService.findPersonsByOrganisationId(organisationId);
     }
 
     public List<PersonInfo> findBySiteId(Long siteId) {
