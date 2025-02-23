@@ -6,6 +6,7 @@ import com.gunitha.site_management_system_java_backend.mapper.entityToRequest.Pe
 import com.gunitha.site_management_system_java_backend.model.read.PersonInfo;
 import com.gunitha.site_management_system_java_backend.model.update.PersonInfoUpdate;
 import com.gunitha.site_management_system_java_backend.repository.IPersonRepository;
+import com.gunitha.site_management_system_java_backend.repository.ISiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +24,12 @@ public class PersonService implements IPersonService {
     @Autowired
     IPersonRepository iPersonRepository;
 
+    @Autowired
+    ISiteRepository iSiteRepository;
+
     @Override
     public PersonInfo findByPersonInfo(Long personId) {
-        return personInfoReadMapper.personInfo(personRepository.findById(personId).get());
+        return personInfoReadMapper.personInfo(iPersonRepository.findById(personId).get());
     }
 
     @Override
@@ -36,7 +40,7 @@ public class PersonService implements IPersonService {
 
     @Override
     public List<PersonInfo> findBySiteId(Long siteId) {
-        return List.of();
+        return iPersonRepository.findPersonBySitesId(siteId).stream().map(person -> personInfoReadMapper.personInfo(person)).toList();
     }
 
     @Override
