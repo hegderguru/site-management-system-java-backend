@@ -30,8 +30,12 @@ public class SiteController {
         return iSiteService.findByOrganisation(organisationId);
     }
 
-    public SiteInfo createSite(SiteInfoUpdate siteInfoUpdate){
+    public SiteInfo createSite(SiteInfoUpdate siteInfoUpdate) {
         return iSiteService.createSite(siteInfoUpdate);
+    }
+
+    public SiteInfo updateSite(SiteInfoUpdate siteInfoUpdate) {
+        return iSiteService.updateSite(siteInfoUpdate);
     }
 
 }
