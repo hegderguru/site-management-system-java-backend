@@ -56,7 +56,7 @@ public class ChangesUtil {
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
-        }).collect(Collectors.joining());
+        }).collect(Collectors.joining("_"));
     }
 
     public static boolean isCustomType(Class clazz) {

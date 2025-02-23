@@ -6,7 +6,7 @@ import com.gunitha.site_management_system_java_backend.change.model.ChangeTarget
 import com.gunitha.site_management_system_java_backend.model.update.AddressInfoUpdate;
 import com.gunitha.site_management_system_java_backend.model.update.PersonInfoUpdate;
 import com.gunitha.site_management_system_java_backend.model.update.SiteInfoUpdate;
-import com.gunitha.site_management_system_java_backend.change.model.ChangesUtil;
+import com.gunitha.site_management_system_java_backend.change.ChangesUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
