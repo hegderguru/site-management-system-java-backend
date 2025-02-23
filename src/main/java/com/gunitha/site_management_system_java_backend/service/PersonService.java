@@ -70,8 +70,8 @@ public class PersonService implements IPersonService {
         List<Person> owners1 = site.getOwners();
         List<Organisation> organisations = iOrganisationRepository.findOrganisationsBySitesId(siteId);
         List<Person> owners2 = organisations.stream().flatMap(organisation -> organisation.getSites().stream()).flatMap(site1 -> site1.getOwners().stream()).toList();
-
-        return iPersonRepository.findPersonBySitesId(siteId).stream().map(person -> personInfoReadMapper.personInfo(person)).toList();
+        owners2.addAll(owners1);
+        return owners2.stream().map(person -> personInfoReadMapper.personInfo(person)).toList();
     }
 
     @Override
