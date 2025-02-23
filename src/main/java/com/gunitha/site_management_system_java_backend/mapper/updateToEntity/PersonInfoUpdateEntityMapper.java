@@ -52,7 +52,7 @@ public class PersonInfoUpdateEntityMapper {
         });
     }
 
-    private Person newPersonEntity(PersonInfoUpdate personInfoUpdate) {
+    public Person newPersonEntity(PersonInfoUpdate personInfoUpdate) {
         return Person.builder()
                 .firstName(personInfoUpdate.getFirstName())
                 .middleName(personInfoUpdate.getMiddleName())

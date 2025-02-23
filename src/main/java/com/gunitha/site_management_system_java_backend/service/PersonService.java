@@ -3,6 +3,7 @@ package com.gunitha.site_management_system_java_backend.service;
 
 import com.gunitha.site_management_system_java_backend.mapper.entityToRead.PersonInfoReadMapper;
 import com.gunitha.site_management_system_java_backend.mapper.entityToRequest.PersonInfoUpdateMapper;
+import com.gunitha.site_management_system_java_backend.mapper.updateToEntity.PersonInfoUpdateEntityMapper;
 import com.gunitha.site_management_system_java_backend.model.read.PersonInfo;
 import com.gunitha.site_management_system_java_backend.model.update.PersonInfoUpdate;
 import com.gunitha.site_management_system_java_backend.repository.IPersonRepository;
@@ -27,6 +28,9 @@ public class PersonService implements IPersonService {
     @Autowired
     ISiteRepository iSiteRepository;
 
+    @Autowired
+    PersonInfoUpdateEntityMapper personInfoUpdateEntityMapper;
+
     @Override
     public PersonInfo findByPersonInfo(Long personId) {
         return personInfoReadMapper.personInfo(iPersonRepository.findById(personId).get());
@@ -44,7 +48,7 @@ public class PersonService implements IPersonService {
     }
 
     @Override
-    public void createPerson(PersonInfoUpdate personInfoUpdate) {
-
+    public PersonInfo createPerson(PersonInfoUpdate personInfoUpdate) {
+        return personInfoReadMapper.personInfo(personInfoUpdateEntityMapper.newPersonEntity(personInfoUpdate));
     }
 }
