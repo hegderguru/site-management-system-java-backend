@@ -22,7 +22,7 @@ public class AddressInfoUpdateEntityMapper {
         changes.forEach(change -> {
             AddressInfoUpdate addressInfoUpdate = (AddressInfoUpdate) change.getRightObject();
             switch (AddressInfoUpdate.Fields.valueOf(change.getFieldName())){
-                case addressType -> address.setAddressType(addressTypeRepository.finByType(ChangeValueExtractUtil.extractString(change.getRightValue())));
+                case addressType -> address.setAddressType(addressTypeRepository.finByType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
                 case number -> address.setNumber(ChangeValueExtractUtil.extractString(change.getRightValue()));
                 case floor -> address.setFloor(ChangeValueExtractUtil.extractString(change.getRightValue()));
                 case street -> address.setStreet(ChangeValueExtractUtil.extractString(change.getRightValue()));

@@ -5,10 +5,12 @@ import com.gunitha.site_management_system_java_backend.model.read.AddressInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldNameConstants(asEnum = true)
 public class OrganisationInfoUpdate {
 
     @ChangeTargetObjectId
