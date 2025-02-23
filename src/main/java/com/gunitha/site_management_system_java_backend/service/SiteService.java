@@ -1,9 +1,15 @@
 package com.gunitha.site_management_system_java_backend.service;
 
+import com.gunitha.site_management_system_java_backend.change.ChangesUtil;
+import com.gunitha.site_management_system_java_backend.change.model.Change;
+import com.gunitha.site_management_system_java_backend.change.model.ChangeTargetObject;
+import com.gunitha.site_management_system_java_backend.entity.Person;
 import com.gunitha.site_management_system_java_backend.entity.Site;
 import com.gunitha.site_management_system_java_backend.mapper.entityToRead.SiteInfoReadMapper;
-import com.gunitha.site_management_system_java_backend.mapper.updateToEntity.SiteInfoUpdateEntityMapper;
+import com.gunitha.site_management_system_java_backend.mapper.entityToRequest.SiteInfoUpdateMapper;
+import com.gunitha.site_management_system_java_backend.mapper.updateToEntity.*;
 import com.gunitha.site_management_system_java_backend.model.read.SiteInfo;
+import com.gunitha.site_management_system_java_backend.model.update.PersonInfoUpdate;
 import com.gunitha.site_management_system_java_backend.model.update.SiteInfoUpdate;
 import com.gunitha.site_management_system_java_backend.repository.IOrganisationRepository;
 import com.gunitha.site_management_system_java_backend.repository.IPersonRepository;
@@ -31,7 +37,22 @@ public class SiteService implements ISiteService {
     SiteInfoReadMapper siteInfoReadMapper;
 
     @Autowired
+    SiteInfoUpdateMapper siteInfoUpdateMapper;
+
+    @Autowired
     SiteInfoUpdateEntityMapper siteInfoUpdateEntityMapper;
+
+    @Autowired
+    AddressInfoUpdateEntityMapper addressInfoUpdateEntityMapper;
+
+    @Autowired
+    PersonInfoUpdateEntityMapper personInfoUpdateEntityMapper;
+
+    @Autowired
+    OrganisationInfoUpdateEntityMapper organisationInfoUpdateEntityMapper;
+
+    @Autowired
+    LocationInfoUpdateEntityMapper locationInfoUpdateEntityMapper;
 
     @Override
     public List<SiteInfo> findAllSites() {
@@ -62,7 +83,18 @@ public class SiteService implements ISiteService {
     }
 
     @Override
-    public SiteInfo updateSite(SiteInfoUpdate siteInfoUpdate) {
-        return null;
+    public SiteInfo updateSite(SiteInfoUpdate updatedSiteInfoUpdate) {
+        SiteInfoUpdate existingSiteInfoUpdate = siteInfoUpdateMapper.siteInfo(iSiteRepository.findById(updatedSiteInfoUpdate.getId()).get());
+        List<ChangeTargetObject> existing = ChangesUtil.getAllCustomTypeObjects(existingSiteInfoUpdate, "SiteInfoUpdate");
+        List<ChangeTargetObject> updated = ChangesUtil.getAllCustomTypeObjects(updatedSiteInfoUpdate, "SiteInfoUpdate");
+        List<Change> changes = ChangesUtil.getChanges(existing, updated);
+        Site site = iSiteRepository.findById(updatedSiteInfoUpdate.getId()).get();
+        personInfoUpdateEntityMapper.updateOrPersonNewLocation(changes, null);
+        addressInfoUpdateEntityMapper.updateOrAddNewAddressEntity(changes, site, null);
+        siteInfoUpdateEntityMapper.updateOrAddNewSite(changes, site);
+        organisationInfoUpdateEntityMapper.updateOrAddNewOrganisation(changes, null);
+        locationInfoUpdateEntityMapper.updateOrAddNewLocation(changes, site);
+        iSiteRepository.save(site);
+        return siteInfoReadMapper.siteInfo(site);
     }
 }
