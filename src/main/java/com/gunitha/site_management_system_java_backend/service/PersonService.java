@@ -70,8 +70,7 @@ public class PersonService implements IPersonService {
 
     @Override
     public PersonInfo updatePerson(PersonInfoUpdate updatedPersonInfoUpdate) {
-        PersonInfoUpdate existingPersonInfoUpdate = personInfoUpdateMapper.personInfo(iPersonRepository.findById(updatedPersonInfoUpdate.getId()).get()))
-        ;
+        PersonInfoUpdate existingPersonInfoUpdate = personInfoUpdateMapper.personInfo(iPersonRepository.findById(updatedPersonInfoUpdate.getId()).get());
         List<ChangeTargetObject> existing = ChangesUtil.getAllCustomTypeObjects(existingPersonInfoUpdate, "personInfoUpdate");
         List<ChangeTargetObject> updated = ChangesUtil.getAllCustomTypeObjects(updatedPersonInfoUpdate, "personInfoUpdate");
         List<Change> changes = ChangesUtil.getChanges(existing, updated);
