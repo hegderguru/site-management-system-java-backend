@@ -9,7 +9,7 @@ public interface IPersonService {
 
     public PersonInfo findByPersonInfo(Long personId);
 
-    public List<PersonInfo> findByOrganisation(Long organisationId);
+    public List<PersonInfo> findPersonsByOrganisationId(Long organisationId);
 
     public List<PersonInfo> findBySiteId(Long siteId);
 

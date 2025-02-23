@@ -19,7 +19,7 @@ public class PersonController {
     }
 
     public List<PersonInfo> findByOrganisation(Long organisationId) {
-        return iPersonService.findByOrganisation(organisationId);
+        return iPersonService.findPersonByOrganisationId(organisationId);
     }
 
     public List<PersonInfo> findBySiteId(Long siteId) {
