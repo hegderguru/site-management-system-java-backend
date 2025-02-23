@@ -14,4 +14,6 @@ public interface IPersonService {
     public List<PersonInfo> findBySiteId(Long siteId);
 
     PersonInfo createPerson(PersonInfoUpdate personInfoUpdate);
+
+    PersonInfo updatePerson(PersonInfoUpdate personInfoUpdate);
 }

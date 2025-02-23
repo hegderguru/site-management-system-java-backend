@@ -29,7 +29,11 @@ public class PersonController {
     }
 
     public PersonInfo createPerson(PersonInfoUpdate personInfoUpdate){
-       return null;// iPersonService.createPerson(personInfoUpdate);
+       return iPersonService.createPerson(personInfoUpdate);
+    }
+
+    public PersonInfo updatePerson(PersonInfoUpdate personInfoUpdate){
+        return iPersonService.updatePerson(personInfoUpdate);
     }
 
 }

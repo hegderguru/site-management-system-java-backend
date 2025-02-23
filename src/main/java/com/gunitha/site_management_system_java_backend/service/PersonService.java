@@ -1,9 +1,13 @@
 package com.gunitha.site_management_system_java_backend.service;
 
 
+import com.gunitha.site_management_system_java_backend.change.ChangesUtil;
+import com.gunitha.site_management_system_java_backend.change.model.Change;
+import com.gunitha.site_management_system_java_backend.change.model.ChangeTargetObject;
+import com.gunitha.site_management_system_java_backend.entity.Person;
 import com.gunitha.site_management_system_java_backend.mapper.entityToRead.PersonInfoReadMapper;
 import com.gunitha.site_management_system_java_backend.mapper.entityToRequest.PersonInfoUpdateMapper;
-import com.gunitha.site_management_system_java_backend.mapper.updateToEntity.PersonInfoUpdateEntityMapper;
+import com.gunitha.site_management_system_java_backend.mapper.updateToEntity.*;
 import com.gunitha.site_management_system_java_backend.model.read.PersonInfo;
 import com.gunitha.site_management_system_java_backend.model.update.PersonInfoUpdate;
 import com.gunitha.site_management_system_java_backend.repository.IPersonRepository;
@@ -31,6 +35,18 @@ public class PersonService implements IPersonService {
     @Autowired
     PersonInfoUpdateEntityMapper personInfoUpdateEntityMapper;
 
+    @Autowired
+    AddressInfoUpdateEntityMapper addressInfoUpdateEntityMapper;
+
+    @Autowired
+    SiteInfoUpdateEntityMapper siteInfoUpdateEntityMapper;
+
+    @Autowired
+    OrganisationInfoUpdateEntityMapper organisationInfoUpdateEntityMapper;
+
+    @Autowired
+    LocationInfoUpdateEntityMapper locationInfoUpdateEntityMapper;
+
     @Override
     public PersonInfo findByPersonInfo(Long personId) {
         return personInfoReadMapper.personInfo(iPersonRepository.findById(personId).get());
@@ -50,5 +66,22 @@ public class PersonService implements IPersonService {
     @Override
     public PersonInfo createPerson(PersonInfoUpdate personInfoUpdate) {
         return personInfoReadMapper.personInfo(personInfoUpdateEntityMapper.newPersonEntity(personInfoUpdate));
+    }
+
+    @Override
+    public PersonInfo updatePerson(PersonInfoUpdate updatedPersonInfoUpdate) {
+        PersonInfoUpdate existingPersonInfoUpdate = personInfoUpdateMapper.personInfo(iPersonRepository.findById(updatedPersonInfoUpdate.getId()).get()))
+        ;
+        List<ChangeTargetObject> existing = ChangesUtil.getAllCustomTypeObjects(existingPersonInfoUpdate, "personInfoUpdate");
+        List<ChangeTargetObject> updated = ChangesUtil.getAllCustomTypeObjects(updatedPersonInfoUpdate, "personInfoUpdate");
+        List<Change> changes = ChangesUtil.getChanges(existing, updated);
+        Person person = iPersonRepository.findById(updatedPersonInfoUpdate.getId()).get();
+        personInfoUpdateEntityMapper.updateOrPersonNewLocation(changes, person);
+        addressInfoUpdateEntityMapper.updateOrAddNewAddressEntity(changes, null, person);
+        siteInfoUpdateEntityMapper.updateOrAddNewSite(changes, null);
+        organisationInfoUpdateEntityMapper.updateOrAddNewOrganisation(changes, person);
+        locationInfoUpdateEntityMapper.updateOrAddNewLocation(changes, null);
+        iPersonRepository.save(person);
+        return personInfoReadMapper.personInfo(person);
     }
 }

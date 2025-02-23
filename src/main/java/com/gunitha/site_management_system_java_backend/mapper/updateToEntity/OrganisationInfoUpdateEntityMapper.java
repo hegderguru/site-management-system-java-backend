@@ -24,7 +24,7 @@ public class OrganisationInfoUpdateEntityMapper {
     @Autowired
     IOrganisationTypeRepository IOrganisationTypeRepository;
 
-    public List<Organisation> updateOrAddNewLocation(List<Change> changes, Person person) {
+    public List<Organisation> updateOrAddNewOrganisation(List<Change> changes, Person person) {
         Map<OrganisationInfoUpdate, List<Change>> organisationInfoUpdateMap = changes.stream().filter(change -> Objects.nonNull(change.getLeftObject()) && change.getRightObject() instanceof OrganisationInfoUpdate)
                 .collect(Collectors.groupingBy(change -> (OrganisationInfoUpdate) change.getRightObject()));
         organisationInfoUpdateMap.keySet().forEach(key -> updateOrganisationEntity(organisationInfoUpdateMap.get(key), getOrganisation(key, person)));
