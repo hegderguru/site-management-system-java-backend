@@ -14,8 +14,8 @@ public class SiteController {
     @Autowired
     ISiteService iSiteService;
 
-    public List<SiteInfo> findAllSites() {
-        return iSiteService.findAllSites();
+    public List<SiteInfo> findBySiteIds(List<Long> siteIds) {
+        return iSiteService.findBySiteIds(siteIds);
     }
 
     public SiteInfo findBySiteId(Long siteId) {

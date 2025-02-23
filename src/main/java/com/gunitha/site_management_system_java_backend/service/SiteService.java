@@ -55,8 +55,8 @@ public class SiteService implements ISiteService {
     LocationInfoUpdateEntityMapper locationInfoUpdateEntityMapper;
 
     @Override
-    public List<SiteInfo> findAllSites() {
-        return iSiteRepository.findAll().stream().map(site -> siteInfoReadMapper.siteInfo(site)).toList();
+    public List<SiteInfo> findBySiteIds(List<Long> siteIds) {
+        return iSiteRepository.findAllByIdIn(siteIds).stream().map(site -> siteInfoReadMapper.siteInfo(site)).toList();
     }
 
     @Override
