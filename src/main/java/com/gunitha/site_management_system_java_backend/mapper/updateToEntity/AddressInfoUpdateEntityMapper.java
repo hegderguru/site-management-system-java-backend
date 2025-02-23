@@ -50,7 +50,7 @@ public class AddressInfoUpdateEntityMapper {
             AddressInfoUpdate addressInfoUpdate = (AddressInfoUpdate) change.getRightObject();
             switch (AddressInfoUpdate.Fields.valueOf(change.getFieldName())) {
                 case addressType ->
-                        address.setAddressType(IAddressTypeRepository.finByType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
+                        address.setAddressType(IAddressTypeRepository.findByType(ChangeValueExtractUtil.extractString(change.getRightValue())).get());
                 case number -> address.setNumber(ChangeValueExtractUtil.extractString(change.getRightValue()));
                 case floor -> address.setFloor(ChangeValueExtractUtil.extractString(change.getRightValue()));
                 case street -> address.setStreet(ChangeValueExtractUtil.extractString(change.getRightValue()));
@@ -65,7 +65,7 @@ public class AddressInfoUpdateEntityMapper {
 
     public Address newAddressEntity(AddressInfoUpdate addressInfoUpdate) {
         return Address.builder()
-                .AddressType(IAddressTypeRepository.finByType(addressInfoUpdate.getAddressType()).get())
+                .AddressType(IAddressTypeRepository.findByType(addressInfoUpdate.getAddressType()).get())
                 .floor(addressInfoUpdate.getFloor())
                 .number(addressInfoUpdate.getNumber())
                 .street(addressInfoUpdate.getStreet())
