@@ -1,4 +1,4 @@
-package com.gunitha.site_management_system_java_backend.model.change;
+package com.gunitha.site_management_system_java_backend.change.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

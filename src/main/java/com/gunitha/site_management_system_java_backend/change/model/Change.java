@@ -1,12 +1,9 @@
-package com.gunitha.site_management_system_java_backend.model.change;
+package com.gunitha.site_management_system_java_backend.change.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.lang.reflect.Field;
-import java.util.Map;
 
 @Data
 @AllArgsConstructor

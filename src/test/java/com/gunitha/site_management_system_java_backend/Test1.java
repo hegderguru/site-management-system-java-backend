@@ -1,14 +1,12 @@
 package com.gunitha.site_management_system_java_backend;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gunitha.site_management_system_java_backend.entity.Person;
-import com.gunitha.site_management_system_java_backend.model.change.Change;
-import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObject;
+import com.gunitha.site_management_system_java_backend.change.model.Change;
+import com.gunitha.site_management_system_java_backend.change.model.ChangeTargetObject;
 import com.gunitha.site_management_system_java_backend.model.update.AddressInfoUpdate;
 import com.gunitha.site_management_system_java_backend.model.update.PersonInfoUpdate;
 import com.gunitha.site_management_system_java_backend.model.update.SiteInfoUpdate;
-import com.gunitha.site_management_system_java_backend.util.ChangesUtil;
+import com.gunitha.site_management_system_java_backend.change.model.ChangesUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

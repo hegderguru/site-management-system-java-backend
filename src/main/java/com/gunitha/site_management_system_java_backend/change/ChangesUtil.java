@@ -1,8 +1,8 @@
-package com.gunitha.site_management_system_java_backend.util;
+package com.gunitha.site_management_system_java_backend.change;
 
-import com.gunitha.site_management_system_java_backend.model.change.Change;
-import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObject;
-import com.gunitha.site_management_system_java_backend.model.change.ChangeTargetObjectId;
+import com.gunitha.site_management_system_java_backend.change.model.Change;
+import com.gunitha.site_management_system_java_backend.change.model.ChangeTargetObject;
+import com.gunitha.site_management_system_java_backend.change.model.ChangeTargetObjectId;
 
 import java.lang.reflect.Field;
 import java.util.*;
