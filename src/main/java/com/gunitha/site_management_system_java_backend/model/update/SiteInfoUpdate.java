@@ -5,12 +5,14 @@ import com.gunitha.site_management_system_java_backend.change.model.ChangeTarget
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldNameConstants(asEnum = true)
 public class SiteInfoUpdate {
 
     @ChangeTargetObjectId
@@ -18,7 +20,7 @@ public class SiteInfoUpdate {
 
     private String number;
 
-    private Integer siteWidth;
+    private Integer width;
 
     private Integer length;
 

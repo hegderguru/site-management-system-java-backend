@@ -3,6 +3,8 @@ package com.gunitha.site_management_system_java_backend.mapper.updateToEntity;
 import com.gunitha.site_management_system_java_backend.change.model.Change;
 import com.gunitha.site_management_system_java_backend.change.model.ChangeValueExtractUtil;
 import com.gunitha.site_management_system_java_backend.entity.Address;
+import com.gunitha.site_management_system_java_backend.entity.Person;
+import com.gunitha.site_management_system_java_backend.entity.Site;
 import com.gunitha.site_management_system_java_backend.model.update.AddressInfoUpdate;
 import com.gunitha.site_management_system_java_backend.repository.AddressTypeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,10 @@ public class AddressInfoUpdateEntityMapper {
 
     @Autowired
     AddressTypeRepository addressTypeRepository;
+
+    public void updateOrAddNewAddressEntity(List<Change> changes, Site site, Person person){
+
+    }
 
     public void updateAddressEntity(List<Change> changes, Address address){
         changes.forEach(change -> {

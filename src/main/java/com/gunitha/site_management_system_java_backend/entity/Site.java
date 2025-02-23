@@ -21,9 +21,11 @@ public class Site {
     @SequenceGenerator(name = "site_seq",sequenceName = "site_seq",initialValue = 100000,allocationSize = 20)
     private Long id;
 
-    private Integer width;
+    private String number;
 
-    private Integer length;
+    private Double width;
+
+    private Double length;
 
     private String description;
 
